@@ -10,3 +10,6 @@ List of extensions:
 ## Diff View with new buttons
 ![](https://github.com/gabr/opextensions/raw/master/diffView.png)
 
+## Folding right panel in Work Package view
+![](https://github.com/gabr/opextensions/raw/master/foldingRightPanel.png)
+

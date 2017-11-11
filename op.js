@@ -74,7 +74,7 @@ const addHideSidePanelButton = function () {
 	}
 
 	// check out if it may be the work package view
-    if(window.location.href.indexOf("work_package") == -1) {
+	if(window.location.href.indexOf("work_package") == -1) {
 		// not the work package view - abort
 		return;
 	}
