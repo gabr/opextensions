@@ -1,62 +1,59 @@
-var docLoaded = setInterval(function () {
-	// if not ready try again later
-	if(document.readyState !== "complete") {
-		return;
+const addButtons = function () {
+	// for logging messages from extension
+	const opLog = function (text) {
+		console.log("OPExtensions: " + text);
 	}
 
-	// probably ready, dont try again
-	clearInterval(docLoaded);
-
 	// try to find expected "Back" button below diff view
-	var diffView = document.querySelectorAll('#content > .text-diff')[0];
+	const diffView = document.querySelector('#content > .text-diff');
 
 	// probably not Open Project page - abort plugin execution
 	if (!diffView) {
 		return;
 	}
 
-	// for logging messages from extension
-	var opLog = function (text) {
-		console.log("OPExtensions: " + text);
-	}
-
 	// found Open Project Diff View
 	opLog("Detected OpenProject Diff View - adding buttons");
 
 	// create buttons holder
-	var btnHolder = document.createElement("p");
+	const btnHolder = document.createElement("p");
 	btnHolder.style.margin = "0";
 	btnHolder.style.padding = "0";
 
 	// add buttons to buttons holder
 	var addButton = function (holder, text, handler) {
-		var button = document.createElement("a");
-		var text = document.createTextNode(text);
+		const button = document.createElement("a");
 
+		button.innerText = text
 		button.style.paddingRight = "7px";
 		button.style.paddingLeft  = "7px";
-		button.appendChild(text);
-		
-		if (handler) {
-			button.addEventListener('click', handler);
-		}
+		button.addEventListener('click', handler);
 
 		holder.appendChild(button);
 	};
 
-	var modifyDiffView = function (showBefore, showAfter) {
-		diffView.querySelectorAll('ins.diffmod').forEach((el) => {
-			el.style.display = showAfter ? "" : "none";
-		});
-		diffView.querySelectorAll('del.diffmod').forEach((el) => {
-			el.style.display = showBefore ? "" : "none";
-		});
+
+	const setDisplayFor = function (selector, displayValue) {
+		const nodes = diffView.querySelectorAll(selector);
+		if (nodes) {
+			for (let i = 0; i < nodes.length; i++) {
+				nodes[i].style.display = displayValue;
+			}
+		}
+	}
+
+	const modifyDiffView = function (showBefore, showAfter) {
+		setDisplayFor('ins.diffmod', (showAfter  ? "" : "none"))
+		setDisplayFor('del.diffmod', (showBefore ? "" : "none"))
 	};
 
-	addButton(btnHolder, "Before",   () => { modifyDiffView(true,  false); });
-	addButton(btnHolder, "After",    () => { modifyDiffView(false, true);  });
-	addButton(btnHolder, "Mix view", () => { modifyDiffView(true,  true);  });
+	addButton(btnHolder, "Before",   modifyDiffView.bind(null, true,  false));
+	addButton(btnHolder, "After",    modifyDiffView.bind(null, false, true));
+	addButton(btnHolder, "Mix view", modifyDiffView.bind(null, true,  true));
 
 	// add buttons holder with buttons before diff view
 	diffView.parentNode.insertBefore(btnHolder, diffView);
-}, 30);
+};
+
+addButtons();
+
