@@ -1,0 +1,20 @@
+{
+	"manifest_version": 2,
+
+		"name": "OPExtensions",
+		"description": "Open Project Extensions - List of extensions: additional buttons (prev, current, mix) in description diff view; additional button in WP view allowing to fold right panel.",
+		"version": "0.1",
+		"author": "github.com/gabr",
+
+		"content_scripts": [
+			{
+				"matches": ["http://*/*", "https://*/*"],
+				"js": ["op.js"]
+			}
+		],
+
+		"permissions": [
+			"activeTab",
+			"storage"
+		]
+}
