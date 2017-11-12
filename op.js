@@ -7,20 +7,21 @@ const waitForElements = function (selectors, delay, numberOfTries, callback) {
 	const selector = selectors.join(',');
 
 	(function check () {
-		 const elements = document.querySelectorAll(selectors);
+		const elements = document.querySelectorAll(selectors);
 
-		 numberOfTries -= 1;
+		numberOfTries -= 1;
 
-		 if (elements.length === selectors.length) {
-			 callback(elements);
-		 } else if (numberOfTries) {
-			 setTimeout(check, delay);
-		 }
-	 })();
+		if (elements.length === selectors.length) {
+			callback(elements);
+		} else if (numberOfTries) {
+			setTimeout(check, delay);
+		}
+	})();
 }
 
 const addHideSidePanelButton = function () {
 	const addArrowButton = function ([leftPanel, rightPanel]) {
+
 		// found split panels
 		opLog('Detected Open Project Work Package view with split panels - adding hide right side panel button');
 
@@ -64,7 +65,7 @@ const addHideSidePanelButton = function () {
 	}
 
 	// check out if it may be the work package view
-	if(!~window.location.href.indexOf("work_package")) {
+	if(window.location.href.indexOf("work_package") === -1) {
 		// not the work package view - abort
 		return;
 	}
@@ -106,9 +107,12 @@ const addDiffButtons = function () {
 
 
 	const setDisplayFor = function (selector, displayValue) {
-		[].forEach.call(diffView.querySelectorAll(selector), node => {
-			node.style.display = displayValue;
-		});
+		const nodes = diffView.querySelectorAll(selector);
+		if (nodes) {
+			for (let i = 0; i < nodes.length; i++) {
+				nodes[i].style.display = displayValue;
+			}
+		}
 	}
 
 	const modifyDiffView = function (showBefore, showAfter) {
