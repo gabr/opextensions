@@ -4,26 +4,19 @@ const opLog = function (text) {
 }
 
 const waitForElements = function (selectors, delay, numberOfTries, callback) {
-	const wait = setInterval(function () {
-		let elements = [];
-		for (let i = 0; i < selectors.length; i++) {
-			let element = document.querySelector(selectors[i]);
-			if (element) {
-				elements.push(element);
-			}
-		}
+	const selector = selectors.join(',');
+
+	(function check () {
+		const elements = document.querySelectorAll(selectors);
 
 		numberOfTries -= 1;
-		if (elements.length !== selectors.length) {
-			if (numberOfTries <= 0) {
-				clearInterval(wait);
-			}
-			return;
-		}
 
-		clearInterval(wait);
-		callback(elements);
-	}, delay);
+		if (elements.length === selectors.length) {
+			callback(elements);
+		} else if (numberOfTries) {
+			setTimeout(check, delay);
+		}
+	})();
 }
 
 const addHideSidePanelButton = function () {
@@ -39,10 +32,10 @@ const addHideSidePanelButton = function () {
 		const rightArrow = document.createElement('a');
 		rightArrow.id = 'op-extensions-hide-side-panel-arrow';
 		rightArrow.classList.add(
-				'navigation-toggler',
-				'icon4',
-				'icon-double-arrow-right'
-			);
+			'navigation-toggler',
+			'icon4',
+			'icon-double-arrow-right'
+		);
 
 		let isRightPanelHidden = false;
 		const switchRightPanelHide = function () {
@@ -68,20 +61,20 @@ const addHideSidePanelButton = function () {
 
 		// add arrow button to the panel
 		arrowHolder.appendChild(rightArrow);
-		leftPanel.insertBefore(arrowHolder, leftPanel.childNodes[0]);
+		leftPanel.insertBefore(arrowHolder, leftPanel.firstChild);
 	}
 
 	// check out if it may be the work package view
-	if(window.location.href.indexOf("work_package") == -1) {
+	if(window.location.href.indexOf("work_package") === -1) {
 		// not the work package view - abort
 		return;
 	}
 
 	// probably the work package wiew - try waiting for panels to show up
-	let sidePanelsSelectors = [
-			'.work-packages--left-panel',
-			'.work-packages--right-panel'
-		];
+	const sidePanelsSelectors = [
+		'.work-packages--left-panel',
+		'.work-packages--right-panel'
+	];
 	waitForElements(sidePanelsSelectors, 200, 50, addArrowButton);
 };
 
@@ -103,10 +96,10 @@ const addDiffButtons = function () {
 	btnHolder.style.padding = '0';
 
 	// add buttons to buttons holder
-	var addButton = function (holder, text, handler) {
+	const addButton = function (holder, text, handler) {
 		const button = document.createElement('a');
 		button.classList.add('op-extensions-diff-button');
-		button.innerText = text
+		button.innerText = text;
 		button.addEventListener('click', handler);
 
 		holder.appendChild(button);
@@ -123,8 +116,8 @@ const addDiffButtons = function () {
 	}
 
 	const modifyDiffView = function (showBefore, showAfter) {
-		setDisplayFor('ins.diffmod', (showAfter  ? '' : 'none'))
-		setDisplayFor('del.diffmod', (showBefore ? '' : 'none'))
+		setDisplayFor('ins.diffmod', (showAfter  ? '' : 'none'));
+		setDisplayFor('del.diffmod', (showBefore ? '' : 'none'));
 	};
 
 	addButton(btnHolder, 'Before',   modifyDiffView.bind(null, true,  false));
