@@ -27,9 +27,7 @@ const waitForElements = function (selectors, delay, numberOfTries, callback) {
 }
 
 const addHideSidePanelButton = function () {
-	const addArrowButton = function (panels) {
-		let leftPanel = panels[0];
-		let rightPanel = panels[1];
+	const addArrowButton = function ([leftPanel, rightPanel]) {
 
 		// found split panels
 		opLog('Detected Open Project Work Package view with split panels - adding hide right side panel button');
