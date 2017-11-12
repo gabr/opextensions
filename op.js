@@ -61,7 +61,7 @@ const addHideSidePanelButton = function () {
 
 		// add arrow button to the panel
 		arrowHolder.appendChild(rightArrow);
-		leftPanel.insertBefore(arrowHolder, leftPanel.firstChild]);
+		leftPanel.insertBefore(arrowHolder, leftPanel.firstChild);
 	}
 
 	// check out if it may be the work package view
