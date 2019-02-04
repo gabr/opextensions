@@ -1,15 +1,19 @@
-addHideSidePanelButton 
 #op-extensions-hide-side-panel-arrow-container {
-	overflow: auto;
+    overflow: auto;
 }
 
 #op-extensions-hide-side-panel-arrow {
-	float: right;
-	margin-left: 20px;
-	color: black;
+    float: right;
+    margin-left: 20px;
+    color: black;
 }
 
 .op-extensions-diff-button {
-	padding-right: 7px;
-	padding-left: 7px;
+    padding-right: 7px;
+    padding-left: 7px;
 }
+
+#work-packages-index .inplace-edit--read .wiki-anchor {
+    display: inline;
+}
+
