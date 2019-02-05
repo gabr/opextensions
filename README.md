@@ -8,10 +8,10 @@ List of extensions:
  - Additional button in work package view allowing to fold right panel
  - Fixes table of contents when using `{{toc}}`
  - Allow to click on work package description without edit, edit button is on the right of text content as gray strip
+ - Save edited work package description with CTLR+S
 
 Disabled by default extensions:
  - Smaller left sidebar menu and right panel - bigger center content view in work package view
- - Save edited work package description with CTLR+S
  - Syntax reference in left sidebar all the time in work package view
 
 ## Diff View with new buttons
