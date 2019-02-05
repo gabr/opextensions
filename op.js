@@ -46,16 +46,14 @@ const addHideSidePanelButton = function () {
                 rightArrow.classList.remove('icon-double-arrow-left');
                 rightArrow.classList.add('icon-double-arrow-right');
 
-                rightPanel.style.minWidth = null;
-                rightPanel.style.width = null;
-                leftPanel.style.width = null;
+                rightPanel.classList.remove('hide-right-panel');
+                leftPanel.classList.remove('hide-right-panel');
             } else {
                 rightArrow.classList.remove('icon-double-arrow-right');
                 rightArrow.classList.add('icon-double-arrow-left');
 
-                rightPanel.style.minWidth = '0px';
-                rightPanel.style.width = '0.001%';
-                leftPanel.style.width = '100%';
+                rightPanel.classList.add('hide-right-panel');
+                leftPanel.classList.add('hide-right-panel');
             }
 
             isRightPanelHidden = !isRightPanelHidden;
@@ -288,6 +286,14 @@ const shrinkLeftMenu = function () {
     });
 }
 
+const shrinkRightPanel = function () {
+    const body = document.getElementsByTagName('body')[0];
+    if (body.getAttribute('class').includes('shrink-right-panel')) {
+        return;
+    }
+
+    body.classList.add('shrink-right-panel');
+}
 
 const main = function () {
     addDiffButtons();
@@ -297,8 +303,8 @@ const main = function () {
         fixTableOfContents();
         scrollIntoAnchorOnLoad();
         addSyntaxReference();
+        shrinkRightPanel();
     }
-
 }
 
 // when url changes

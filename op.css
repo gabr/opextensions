@@ -1,18 +1,3 @@
-#op-extensions-hide-side-panel-arrow-container {
-    overflow: auto;
-}
-
-#op-extensions-hide-side-panel-arrow {
-    float: right;
-    margin-left: 20px;
-    color: black;
-}
-
-.op-extensions-diff-button {
-    padding-right: 7px;
-    padding-left: 7px;
-}
-
 #work-packages-index .inplace-edit--read .wiki-anchor {
     display: inline;
 }
@@ -73,13 +58,37 @@
     height: auto !important;
 }
 
-.work-packages--show-view .work-packages--right-panel {
+.shrink-right-panel .work-packages--right-panel {
     min-width: 0 !important;
     overflow-x: auto !important;
-    width: 350px !important;
+    width: 430px !important;
 }
 
-.work-packages--show-view .work-packages--left-panel {
+.shrink-right-panel .work-packages--left-panel {
     width: 100% !important;
+}
+
+.hide-right-panel.work-packages--right-panel {
+    min-width: 0px !important;
+    width: 0.001% !important;
+}
+
+.hide-right-panel.work-packages--left-panel {
+    width: 100% !important;
+}
+
+#op-extensions-hide-side-panel-arrow-container {
+    overflow: auto;
+}
+
+#op-extensions-hide-side-panel-arrow {
+    float: right;
+    margin-left: 20px;
+    color: black;
+}
+
+.op-extensions-diff-button {
+    padding-right: 7px;
+    padding-left: 7px;
 }
 
