@@ -349,12 +349,12 @@ const monitorUrlChange = function () {
     prevUrl = document.URL;
     addDiffButtons();
     if (isOnWorkPackageView()) {
-        shrinkLeftMenu();
+        //shrinkLeftMenu();
         addHideSidePanelButton();
         fixTableOfContents();
         scrollIntoAnchorOnLoad();
-        addSyntaxReference();
-        shrinkRightPanel();
+        //addSyntaxReference();
+        //shrinkRightPanel();
         fixEditButton();
     }
 }
