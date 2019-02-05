@@ -27,7 +27,7 @@ const waitForElements = function (selectors, delay, numberOfTries, callback) {
 }
 
 const isOnWorkPackageView = function () {
-    return (window.location.href.indexOf("work_package") !== -1);
+    return !!document.URL.match(/work_packages[/\\]\d+?/);
 }
 
 const addHideSidePanelButton = function () {
@@ -184,8 +184,85 @@ const scrollIntoAnchorOnLoad = function () {
 
     const anchor = urlSplit[1];
     waitForElements(['#work-package-description'], 400, 50, function () {
-        document.getElementById(anchor).scrollIntoView();
+        const element = document.getElementById(anchor);
+        if (element) {
+            element.scrollIntoView();
+        }
     });
+}
+
+const addSyntaxReference = function () {
+    const syntaxReferenceHtml = String.raw`
+<div id='syntax-reference'>
+<h2>Syntax</h2>
+<ul>
+    <li>Formatting
+        <ul>
+            <li><strong>*strong*</strong></li>
+            <li><em>_Italic_</em></li>
+            <li><ins>+Underline+</ins></li>
+            <li><del>-Deleted-</del></td>
+            <li><cite>??Quote??</cite></td>
+            <li><code>@Inline Code@</code></td>
+            <li>
+                <pre>&lt;pre&gt;
+lines
+of code
+&lt;/pre&gt;</pre>
+            </li>
+        </ul>
+    </li>
+    <li>Lists
+        <ul>
+            <li>
+                <ul>
+                    <li>* Item 1</li>
+                    <li>* Item 2</li>
+                </ul>
+            </li>
+            <li>
+                <ol>
+                    <li># Item 1</li>
+                    <li># Item 2</li>
+                </ol>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Headings:
+        <ul>
+            <li>.h1 Title 1</li>
+            <li>.h2 Title 2</li>
+            <li>.h3 Title 3</li>
+        </ul>
+    </li>
+    <li>Links
+        <ul>
+            <li><a href="http://foo.bar">http://foo.bar</a></li>
+            <li><a href="http://foo.bar">"Foo"</a>:http://foo.bar</li>
+        </ul>
+    </li>
+    <li>OP Links
+        <ul>
+            <li>[[Wiki page]]</li>
+            <li>[[ProjectName:Wiki page]]</li>
+            <li>WorkPackage #12</li>
+            <li>WorkPackage ##12</li>
+            <li>WorkPackage ###12</li>
+            <li>Revision r13</li>
+        </ul>
+    </li>
+</ul>
+</div>
+`;
+
+    const sidebar = document.getElementById('sidebar');
+    if (!sidebar) {
+        return;
+    }
+
+    opLog('Detected sidebar - adding syntax reference');
+    sidebar.innerHTML = syntaxReferenceHtml;
 }
 
 
@@ -194,5 +271,6 @@ if (isOnWorkPackageView()) {
     addHideSidePanelButton();
     fixTableOfContents();
     scrollIntoAnchorOnLoad();
+    addSyntaxReference();
 }
 

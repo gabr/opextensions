@@ -17,3 +17,22 @@
     display: inline;
 }
 
+#syntax-reference a {
+    line-height: 1em !important;
+}
+
+#syntax-reference ul {
+    margin-left: 1em !important;
+}
+
+#syntax-reference > ul {
+    margin-top: -1em !important;
+}
+
+#syntax-reference > ul > li {
+    margin-top: 1em !important;
+}
+
+#syntax-reference > ul > li > ul > li > ol {
+    margin-top: 1em !important;
+}
