@@ -1,11 +1,3 @@
-const opLog = function (text) {
-    console.log("OPExtensions: " + text);
-}
-const opLogError = function (text) {
-    console.error("OPExtensions error: " + text);
-}
-
-
 const waitForElements = function (selectors, delay, numberOfTries, callback) {
     const selector = selectors.join(',');
 
@@ -31,15 +23,10 @@ const isOnWorkPackageView = function () {
 }
 
 const addHideSidePanelButton = function () {
-    if (isOnWorkPackageView() === false) {
-        // not the work package view - abort
-        return;
-    }
-
     const addArrowButton = function ([leftPanel, rightPanel]) {
-
-        // found split panels
-        opLog('Detected Open Project Work Package view with split panels - adding hide right side panel button');
+        if (leftPanel.innerHTML.includes('op-extensions-hide-side-panel-arrow-container')) {
+            return;
+        }
 
         // create arrow button
         const arrowHolder = document.createElement('div');
@@ -97,8 +84,9 @@ const addDiffButtons = function () {
         return;
     }
 
-    // found Open Project Diff View
-    opLog('Detected OpenProject Diff View - adding buttons');
+    if (diffView.innerHTML.includes('op-extensions-diff-button')) {
+        return;
+    }
 
     // create buttons holder
     const btnHolder = document.createElement('p');
@@ -153,7 +141,6 @@ const fixTableOfContents = function () {
 
     const links = editor.querySelectorAll('a');
     if (!links) {
-        opLogError('Editor not found');
         return;
     }
 
@@ -192,6 +179,15 @@ const scrollIntoAnchorOnLoad = function () {
 }
 
 const addSyntaxReference = function () {
+    const sidebar = document.getElementById('sidebar');
+    if (!sidebar) {
+        return;
+    }
+
+    if (sidebar.innerHTML.includes('syntax-reference')) {
+        return;
+    }
+
     const syntaxReferenceHtml = String.raw`
 <div id='syntax-reference'>
 <h2>Syntax</h2>
@@ -256,21 +252,66 @@ of code
 </div>
 `;
 
-    const sidebar = document.getElementById('sidebar');
-    if (!sidebar) {
-        return;
-    }
-
-    opLog('Detected sidebar - adding syntax reference');
     sidebar.innerHTML = syntaxReferenceHtml;
 }
 
+let wrapperClassChangeOberver = null;
+const shrinkLeftMenu = function () {
+    const wrapper = document.getElementById('wrapper');
+    if (!wrapper) {
+        return;
+    }
 
-addDiffButtons();
-if (isOnWorkPackageView()) {
-    addHideSidePanelButton();
-    fixTableOfContents();
-    scrollIntoAnchorOnLoad();
-    addSyntaxReference();
+    const addRemoveShrinkClass = function () {
+        const classes = wrapper.getAttribute('class');
+        if (classes.includes('hidden-navigation')) {
+            if (!classes.includes('shrink-left-menu')) {
+                return;
+            }
+            wrapper.classList.remove('shrink-left-menu');
+        } else {
+            if (classes.includes('shrink-left-menu')) {
+                return;
+            }
+            wrapper.classList.add('shrink-left-menu');
+        }
+    }
+
+    addRemoveShrinkClass();
+
+    wrapperClassChangeOberver = new MutationObserver(addRemoveShrinkClass);
+    wrapperClassChangeOberver.observe(wrapper, {
+      attributes: true,
+      attributeFilter: ['class'],
+      childList: false,
+      characterData: false
+    });
 }
+
+
+const main = function () {
+    addDiffButtons();
+    if (isOnWorkPackageView()) {
+        shrinkLeftMenu();
+        addHideSidePanelButton();
+        fixTableOfContents();
+        scrollIntoAnchorOnLoad();
+        addSyntaxReference();
+    }
+
+}
+
+// when url changes
+let prevUrl = null;
+const monitorUrlChange = function () {
+    setTimeout(monitorUrlChange, 300);
+    if (document.URL === prevUrl) {
+        return;
+    }
+
+    prevUrl = document.URL;
+    main();
+}
+
+monitorUrlChange();
 

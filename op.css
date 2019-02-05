@@ -17,12 +17,17 @@
     display: inline;
 }
 
-#syntax-reference a {
-    line-height: 1em !important;
+#syntax-reference h2 {
+    font-size: 1.1em !important;
 }
 
 #syntax-reference ul {
     margin-left: 1em !important;
+    font-size: 0.9em !important;
+}
+
+#syntax-reference ol {
+    font-size: 0.9em !important;
 }
 
 #syntax-reference > ul {
@@ -36,3 +41,45 @@
 #syntax-reference > ul > li > ul > li > ol {
     margin-top: 1em !important;
 }
+
+#syntax-reference a {
+    line-height: inherit !important;
+}
+
+.shrink-left-menu #logo {
+    width: 200px !important;
+}
+
+.shrink-left-menu #main-menu {
+    width: 200px !important;
+}
+
+.shrink-left-menu #toggle-project-menu {
+    width: 200px !important;
+}
+
+.shrink-left-menu #content {
+    width: calc(100% - 200px) !important;
+    margin-left: 200px !important;
+}
+
+.shrink-left-menu #breadcrumb {
+    margin-left: 200px !important;
+}
+
+.shrink-left-menu #main-menu a {
+    font-size: 0.7em !important;
+    line-height: 3em !important;
+    height: auto !important;
+}
+
+.work-packages--show-view .work-packages--right-panel {
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    width: 350px !important;
+}
+
+.work-packages--show-view .work-packages--left-panel {
+    width: 100% !important;
+}
+
