@@ -351,7 +351,6 @@ const monitorUrlChange = function () {
     if (isOnWorkPackageView()) {
         //shrinkLeftMenu();
         addHideSidePanelButton();
-        fixTableOfContents();
         scrollIntoAnchorOnLoad();
         //addSyntaxReference();
         //shrinkRightPanel();
@@ -361,4 +360,5 @@ const monitorUrlChange = function () {
 
 monitorUrlChange();
 addCtrlSSupport();
+fixTableOfContents();
 
