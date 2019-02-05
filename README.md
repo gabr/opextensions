@@ -24,10 +24,10 @@ Disabled by default extensions:
 
 Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.ps1`
 
+- spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
 - automatyczne przypisywanie mnie do zadania przy tworzeniu nowych
 - automatyczna struktura opisu przy tworzeniu nowych zadań
 - dodanie przycisku, który pozwala od razu utworzyć BUG/TASK by potem nie trzeba było zmieniać typu
-- spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
 - gotowe listy wyborów do pól Requested By itd
 - numeracja spisu treści i nagłówków
 - usuwanie wszystkich filtrów jednym małym guziczkiem obok guzyka filtrów

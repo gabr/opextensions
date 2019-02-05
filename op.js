@@ -18,6 +18,25 @@ const waitForElements = function (selectors, delay, numberOfTries, callback) {
     setTimeout(check, delay);
 }
 
+const waitForId = function (id, delay, numberOfTries, callback) {
+    const check = function () {
+        const element = document.getElementById(id);
+
+        if (numberOfTries != null) {
+            numberOfTries -= 1;
+        }
+
+        if (element) {
+            callback(element);
+        } else if (numberOfTries == null || numberOfTries) {
+            setTimeout(check, delay);
+        }
+    }
+
+    setTimeout(check, delay);
+}
+
+
 const isOnWorkPackageView = function () {
     return !!document.URL.match(/work_packages[/\\]\d+?/);
 }
@@ -168,11 +187,8 @@ const scrollIntoAnchorOnLoad = function () {
     }
 
     const anchor = urlSplit[1];
-    waitForElements(['#work-package-description'], 400, 50, function () {
-        const element = document.getElementById(anchor);
-        if (element) {
-            element.scrollIntoView();
-        }
+    waitForId(anchor, 400, 50, function (element) {
+        element.scrollIntoView();
     });
 }
 
