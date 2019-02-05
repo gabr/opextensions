@@ -10,6 +10,7 @@ List of extensions:
  - Syntax reference in left sidebar all the time in work package view
  - Smaller left sidebar menu and right panel - bigger center content view in work package view
  - Allow to click on work package description without edit, edit button is on the right of text content as gray strip
+ - Save edited work package description with CTLR+S
 
 ## Diff View with new buttons
 ![](https://github.com/gabr/opextensions/raw/master/diffView.png)
@@ -21,7 +22,6 @@ List of extensions:
 
 Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.ps1`
 
-- akceptowanie edytowanego opisu za pomocą CTRL+S
 - automatyczne przypisywanie mnie do zadania przy tworzeniu nowych
 - automatyczna struktura opisu przy tworzeniu nowych zadań
 - dodanie przycisku, który pozwala od razu utworzyć BUG/TASK by potem nie trzeba było zmieniać typu

@@ -320,7 +320,33 @@ const fixEditButton = function () {
     waitForElements(editorSelectors, 200, 50, moveEditButtonOutsideEditor);
 }
 
-const main = function () {
+const addCtrlSSupport = function () {
+    document.addEventListener("keydown", function(e) {
+      if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.keyCode == 83) {
+        if (isOnWorkPackageView() === false) {
+            return;
+        }
+
+        const saveButton = document.querySelector('.inplace-edit--controls .inplace-edit--control--save a');
+        if (!saveButton) {
+            return;
+        }
+
+        e.preventDefault();
+        saveButton.click();
+      }
+    }, false);
+}
+
+// when url changes
+let prevUrl = null;
+const monitorUrlChange = function () {
+    setTimeout(monitorUrlChange, 300);
+    if (document.URL === prevUrl) {
+        return;
+    }
+
+    prevUrl = document.URL;
     addDiffButtons();
     if (isOnWorkPackageView()) {
         shrinkLeftMenu();
@@ -333,18 +359,6 @@ const main = function () {
     }
 }
 
-// when url changes
-let prevUrl = null;
-const monitorUrlChange = function () {
-    setTimeout(monitorUrlChange, 300);
-    if (document.URL === prevUrl) {
-        return;
-    }
-
-    prevUrl = document.URL;
-    main();
-}
-
 monitorUrlChange();
-
+addCtrlSSupport();
 
