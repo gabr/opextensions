@@ -31,4 +31,5 @@ Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.
 - edytor WYSIWYG
 - wykrywanie konfliktu edycji w trakcie edycji
 - spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
+- widok blame
 

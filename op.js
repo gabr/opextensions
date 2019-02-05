@@ -9,17 +9,21 @@ const opLogError = function (text) {
 const waitForElements = function (selectors, delay, numberOfTries, callback) {
     const selector = selectors.join(',');
 
-    (function check () {
+    const check = function () {
         const elements = document.querySelectorAll(selectors);
 
-        numberOfTries -= 1;
+        if (numberOfTries != null) {
+            numberOfTries -= 1;
+        }
 
         if (elements.length === selectors.length) {
             callback(elements);
-        } else if (numberOfTries) {
+        } else if (numberOfTries == null || numberOfTries) {
             setTimeout(check, delay);
         }
-    })();
+    }
+
+    setTimeout(check, delay);
 }
 
 const isOnWorkPackageView = function () {
@@ -135,55 +139,60 @@ const addDiffButtons = function () {
 };
 
 const fixTableOfContents = function () {
-    const fixLinksToHeaders = function ([editor]) {
-        if (!editor) {
-            opLogError('Editor not found');
-            return;
-        }
+    setTimeout(fixTableOfContents, 300);
 
-        const toc = editor.querySelector('.toc');
-        if (!toc) {
-            return;
-        }
-
-        opLog('Table of Contents detected - fixing links to headers');
-
-        const links = editor.querySelectorAll('a');
-        if (!links) {
-            opLogError('Editor not found');
-            return;
-        }
-
-        const urlSplit = document.URL.split("#");
-        const baseUrl = urlSplit[0];
-
-        for (let i = 0; i < links.length; i++) {
-            const href = links[i].getAttribute('href');
-            if (!href || href.startsWith("#") === false) {
-                continue;
-            }
-
-            links[i].setAttribute('href', baseUrl + href);
-
-            const classes = links[i].getAttribute('class');
-            if (classes && classes.includes('wiki-anchor')) {
-                links[i].parentNode.setAttribute('id', href.substring(1))
-            }
-        }
-
-        if (urlSplit.length > 1) {
-            document.getElementById(urlSplit[1]).scrollIntoView();
-        }
+    const editor = document.querySelector('#work-package-description');
+    if (!editor) {
+        return;
     }
 
-    const detectEditorSelectors = ['#work-package-description'];
-    waitForElements(detectEditorSelectors, 200, 50, fixLinksToHeaders);
+    const toc = editor.querySelector('.toc');
+    if (!toc) {
+        return;
+    }
+
+    const links = editor.querySelectorAll('a');
+    if (!links) {
+        opLogError('Editor not found');
+        return;
+    }
+
+    const urlSplit = document.URL.split("#");
+    const baseUrl = urlSplit[0];
+
+    for (let i = 0; i < links.length; i++) {
+        const href = links[i].getAttribute('href');
+        if (!href || href.startsWith("#") === false) {
+            continue;
+        }
+
+        links[i].setAttribute('href', baseUrl + href);
+
+        const classes = links[i].getAttribute('class');
+        if (classes && classes.includes('wiki-anchor')) {
+            links[i].parentNode.setAttribute('id', href.substring(1))
+        }
+    }
 };
+
+const scrollIntoAnchorOnLoad = function () {
+    const urlSplit = document.URL.split("#");
+
+    if (urlSplit.Length <= 1) {
+        return;
+    }
+
+    const anchor = urlSplit[1];
+    waitForElements(['#work-package-description'], 400, 50, function () {
+        document.getElementById(anchor).scrollIntoView();
+    });
+}
 
 
 addDiffButtons();
 if (isOnWorkPackageView()) {
     addHideSidePanelButton();
     fixTableOfContents();
+    scrollIntoAnchorOnLoad();
 }
 
