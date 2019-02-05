@@ -92,3 +92,8 @@
     padding-left: 7px;
 }
 
+.edit-button-outside-editor {
+    background-color: #F8F8F8 !important; /* red !important; */
+    width: 30px !important;
+}
+

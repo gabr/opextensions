@@ -9,6 +9,7 @@ List of extensions:
  - Fixes table of contents when using `{{toc}}`
  - Syntax reference in left sidebar all the time in work package view
  - Smaller left sidebar menu and right panel - bigger center content view in work package view
+ - Allow to click on work package description without edit, edit button is on the right of text content as gray strip
 
 ## Diff View with new buttons
 ![](https://github.com/gabr/opextensions/raw/master/diffView.png)
@@ -30,7 +31,6 @@ Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.
 - usuwanie wszystkich filtrów jednym małym guziczkiem obok guzyka filtrów
 
 - monitorowanie ilości wykonanych tasków OP w pracy
-- nie wchodzenie w tryb edycji gdy się kliknie w opis
 - edytor WYSIWYG
 - wykrywanie konfliktu edycji w trakcie edycji
 - automatyczne wykrywanie podmiany treści w rodzicu przy edycji dziecka

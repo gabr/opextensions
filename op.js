@@ -295,6 +295,31 @@ const shrinkRightPanel = function () {
     body.classList.add('shrink-right-panel');
 }
 
+const fixEditButton = function () {
+    const moveEditButtonOutsideEditor = function ([editButton, editor]) {
+        if (editButton.getAttribute('class').includes('edti-button-outside-editor')) {
+            return;
+        }
+
+        const parent = editButton.parentNode;
+        editButton.removeChild(editor);
+
+        parent.removeChild(editButton);
+        editor.removeChild(editor.getElementsByClassName('inplace-edit--icon-wrapper')[0]);
+
+        parent.appendChild(editor);
+        parent.appendChild(editButton);
+
+        editButton.classList.add('edit-button-outside-editor');
+    }
+
+    const editorSelectors = [
+        '#work-package-description .inplace-editing--container',
+        '#work-package-description .inplace-editing--trigger-link'
+    ];
+    waitForElements(editorSelectors, 200, 50, moveEditButtonOutsideEditor);
+}
+
 const main = function () {
     addDiffButtons();
     if (isOnWorkPackageView()) {
@@ -304,6 +329,7 @@ const main = function () {
         scrollIntoAnchorOnLoad();
         addSyntaxReference();
         shrinkRightPanel();
+        fixEditButton();
     }
 }
 
@@ -320,4 +346,5 @@ const monitorUrlChange = function () {
 }
 
 monitorUrlChange();
+
 
