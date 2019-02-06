@@ -313,7 +313,11 @@ const shrinkRightPanel = function () {
 
 const fixEditButton = function () {
     const moveEditButtonOutsideEditor = function ([editButton, editor]) {
-        if (editButton.getAttribute('class').includes('edti-button-outside-editor')) {
+        editButton = document.querySelector('#work-package-description .inplace-editing--trigger-link');
+        editor = document.querySelector('#work-package-description .inplace-editing--container');
+        body = document.getElementsByTagName('body')[0];
+
+        if (body.getAttribute('class').includes('edti-button-outside-editor')) {
             return;
         }
 
@@ -326,7 +330,7 @@ const fixEditButton = function () {
         parent.appendChild(editor);
         parent.appendChild(editButton);
 
-        editButton.classList.add('edit-button-outside-editor');
+        body.classList.add('edit-button-outside-editor');
     }
 
     const editorSelectors = [

@@ -92,8 +92,18 @@
     padding-left: 7px;
 }
 
-.edit-button-outside-editor {
-    background-color: #F8F8F8 !important; /* red !important; */
+.edit-button-outside-editor
+#work-package-description
+.inplace-editing--trigger-link
+{
+    background-color: #F8F8F8 !important;
     width: 30px !important;
+}
+
+.edit-button-outside-editor
+#work-package-description
+.inplace-editing--container
+{
+    width: calc(100% - 30px) !important;
 }
 

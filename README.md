@@ -25,6 +25,8 @@ Disabled by default extensions:
 Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.ps1`
 
 - spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
+- monitorowanie ilości wykonanych tasków OP w pracy
+
 - automatyczne przypisywanie mnie do zadania przy tworzeniu nowych
 - automatyczna struktura opisu przy tworzeniu nowych zadań
 - dodanie przycisku, który pozwala od razu utworzyć BUG/TASK by potem nie trzeba było zmieniać typu
@@ -32,7 +34,6 @@ Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.
 - numeracja spisu treści i nagłówków
 - usuwanie wszystkich filtrów jednym małym guziczkiem obok guzyka filtrów
 
-- monitorowanie ilości wykonanych tasków OP w pracy
 - edytor WYSIWYG
 - wykrywanie konfliktu edycji w trakcie edycji
 - automatyczne wykrywanie podmiany treści w rodzicu przy edycji dziecka
