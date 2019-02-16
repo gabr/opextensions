@@ -378,6 +378,58 @@ const isLoggedIn = function () {
     return !!document.querySelector('a.my-account-menu-item');
 }
 
+const sendGetRequest = function (url, successCallback, errorCallback) {
+    var r = new XMLHttpRequest();
+    r.open("GET", url, true);
+    r.timeout = 30000; // ms
+    r.onerror = errorCallback;
+    r.onreadystatechange = function () {
+        if (r.readyState != 4) {
+            return;
+        }
+
+        if (r.status >= 200 && r.status < 300) {
+            successCallback(r);
+        } else {
+            errorCallback(r);
+        }
+    };
+
+    r.send();
+}
+
+const updateVisualizationView = function (visualizationViewElement) {
+    sendGetRequest(
+        'http://10.0.0.100:82/openproject/api/v3/work_packages?assigned=me',
+
+        function (r) {
+            var response = JSON.parse(r.responseText);
+
+            const workPackagesListElement = document.getElementById('visualizationWorkPackagesList');
+            while (workPackagesListElement.firstChild) {
+                workPackagesListElement.removeChild(workPackagesListElement.firstChild);
+            }
+
+            const workPackages = response._embedded.elements;
+            for (var i = workPackages.length - 1; i >= 0; --i ) {
+                const wp = workPackages[i];
+                if (wp._type !== 'WorkPackage') {
+                    continue;
+                }
+
+                const workPackageListItemElement = document.createElement('li');
+                workPackageListItemElement.innerText = wp.id + ": " + wp.subject;
+                workPackagesListElement.appendChild(workPackageListItemElement);
+            }
+
+            setTimeout(updateVisualizationView, 1000, visualizationViewElement);
+        },
+
+        function (r) {
+            setTimeout(updateVisualizationView, 5000, visualizationViewElement);
+        });
+}
+
 const toggleVisualizationView = function () {
     const visualizationViewId = 'visualization-view';
     let visualizationViewElement = document.getElementById(visualizationViewId);
@@ -394,7 +446,17 @@ const toggleVisualizationView = function () {
 
         visualizationViewElement = document.createElement('div');
         visualizationViewElement.id = visualizationViewId;
+
+        const errorParagraphElement = document.createElement('p');
+        errorParagraphElement.id = 'visualizationViewError';
+        visualizationViewElement.appendChild(errorParagraphElement);
+
+        const workPackagesListElement = document.createElement('ul');
+        workPackagesListElement.id = 'visualizationWorkPackagesList';
+        visualizationViewElement.appendChild(workPackagesListElement);
+
         wrapperElement.insertBefore(visualizationViewElement, mainElement);
+        updateVisualizationView(visualizationViewElement);
     }
 
     const bodyElement = document.getElementsByTagName('body')[0];

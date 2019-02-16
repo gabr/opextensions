@@ -32,6 +32,11 @@ Viewer: https://fontdrop.info/
 Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.ps1`
 
 - monitorowanie ilości wykonanych tasków OP w pracy
+  [x] przycisk do pokazywania/ukrywania widoku wizualiacji
+  [x] pobieranie i wyświetlanie listy moich wp
+  [ ] ograniczenie pobierania wp do wybranego okresu czasu (np ostatni tydzień/dwa)
+  [ ] grupowanie pobranych wp na dni
+  [ ] grupowanie pobranych wp na nowe/zaktualizowane/zamknięte/bugi
 - spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
 
 - automatyczne przypisywanie mnie do zadania przy tworzeniu nowych
