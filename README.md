@@ -20,12 +20,19 @@ Disabled by default extensions:
 ## Folding right panel in Work Package view
 ![](https://github.com/gabr/opextensions/raw/master/foldingRightPanel.png)
 
+# Notes
+
+## Open Project font
+
+Link: ip/openproject/assets/openproject_icon/openproject-icon-font-0fa57de9920f071d47c64a90b2dc00b6.woff
+Viewer: https://fontdrop.info/
+
 # TODO
 
 Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.ps1`
 
-- spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
 - monitorowanie ilości wykonanych tasków OP w pracy
+- spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
 
 - automatyczne przypisywanie mnie do zadania przy tworzeniu nowych
 - automatyczna struktura opisu przy tworzeniu nowych zadań

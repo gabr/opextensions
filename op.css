@@ -1,4 +1,6 @@
-#work-packages-index .inplace-edit--read .wiki-anchor {
+#work-packages-index
+.inplace-edit--read
+.wiki-anchor {
     display: inline;
 }
 
@@ -31,34 +33,41 @@
     line-height: inherit !important;
 }
 
-.shrink-left-menu #logo {
+.shrink-left-menu
+#logo {
     width: 200px !important;
 }
 
-.shrink-left-menu #main-menu {
+.shrink-left-menu
+#main-menu {
     width: 200px !important;
 }
 
-.shrink-left-menu #toggle-project-menu {
+.shrink-left-menu
+#toggle-project-menu {
     width: 200px !important;
 }
 
-.shrink-left-menu #content {
+.shrink-left-menu
+#content {
     width: calc(100% - 200px) !important;
     margin-left: 200px !important;
 }
 
-.shrink-left-menu #breadcrumb {
+.shrink-left-menu
+#breadcrumb {
     margin-left: 200px !important;
 }
 
-.shrink-left-menu #main-menu a {
+.shrink-left-menu
+#main-menu a {
     font-size: 0.7em !important;
     line-height: 3em !important;
     height: auto !important;
 }
 
-.shrink-right-panel .work-packages--right-panel {
+.shrink-right-panel
+.work-packages--right-panel {
     min-width: 0 !important;
     overflow-x: auto !important;
     width: 430px !important;
@@ -107,3 +116,28 @@
     width: calc(100% - 30px) !important;
 }
 
+.visualization-view-on
+#main {
+    display: none;
+}
+
+.visualization-view-on
+#visualization-view {
+    display: block;
+}
+
+.visualization-view-off
+#main {
+    display: block;
+}
+
+.visualization-view-off
+#visualization-view {
+    display: none;
+}
+
+#visualization-view {
+    background-color: red;
+    width: 100%;
+    height: 500px;
+}

@@ -1,3 +1,19 @@
+/*
+   chrome://extensions
+   1. Prawy klawisz myszy na przycisku odświeżania rozszerzenia i "Zbadaj"
+   2. Prawy klawisz myszy na elemencie w designerze i wybierz "Store as global variable"
+   3. Teraz zmodyfikuj poniższą funkcję wpisują pod "temp1" utworzoną zmienną globalną.
+   4. Teraz wklej i wykonaj poniższy kod w konsoli designera:
+
+          const refreshExtensions = function () {
+            temp1.click();
+            setTimeout(refreshExtensions, 1500);
+          }
+          refreshExtensions();
+*/
+
+if (document.URL.includes('openproject')) {
+
 const waitForElements = function (selectors, delay, numberOfTries, callback) {
     const selector = selectors.join(',');
 
@@ -358,6 +374,59 @@ const addCtrlSSupport = function () {
     }, false);
 }
 
+const isLoggedIn = function () {
+    return !!document.querySelector('a.my-account-menu-item');
+}
+
+const toggleVisualizationView = function () {
+    const visualizationViewId = 'visualization-view';
+    let visualizationViewElement = document.getElementById(visualizationViewId);
+    if (!visualizationViewElement) {
+        const wrapperElement = document.getElementById('wrapper');
+        if (!wrapperElement) {
+            return;
+        }
+
+        const mainElement = document.getElementById('main');
+        if (!mainElement) {
+            return;
+        }
+
+        visualizationViewElement = document.createElement('div');
+        visualizationViewElement.id = visualizationViewId;
+        wrapperElement.insertBefore(visualizationViewElement, mainElement);
+    }
+
+    const bodyElement = document.getElementsByTagName('body')[0];
+    const isVisualizationViewOn = bodyElement.classList.contains('visualization-view-on');
+    if (isVisualizationViewOn) {
+        bodyElement.classList.remove('visualization-view-on');
+        bodyElement.classList.add('visualization-view-off');
+    } else {
+        bodyElement.classList.remove('visualization-view-off');
+        bodyElement.classList.add('visualization-view-on');
+    }
+}
+
+const addSwitchToVisualizationButton = function () {
+    if (!isLoggedIn()) {
+        return;
+    }
+
+    const buttonId = 'switch-to-visualization-button';
+    if (!!document.getElementById(buttonId)) {
+        return;
+    }
+
+    const listToPutButtonIn = document.getElementById('account-nav-right');
+    if (!listToPutButtonIn) {
+        return;
+    }
+
+    listToPutButtonIn.insertAdjacentHTML('afterbegin', '<li><a id="' + buttonId + '" accesskey="s" title="Visualization" class="icon5 icon-status help-menu-item ellipsis"></a></li>');
+    document.getElementById(buttonId).addEventListener("click", toggleVisualizationView, false);
+}
+
 // when url changes
 let prevUrl = null;
 const monitorUrlChange = function () {
@@ -365,15 +434,17 @@ const monitorUrlChange = function () {
     if (document.URL === prevUrl) {
         return;
     }
-
     prevUrl = document.URL;
+
     addDiffButtons();
+    addSwitchToVisualizationButton();
+
     if (isOnWorkPackageView()) {
-        //shrinkLeftMenu();
+        shrinkLeftMenu();
         addHideSidePanelButton();
         scrollIntoAnchorOnLoad();
-        //addSyntaxReference();
-        //shrinkRightPanel();
+        addSyntaxReference();
+        shrinkRightPanel();
         fixEditButton();
     }
 }
@@ -381,4 +452,6 @@ const monitorUrlChange = function () {
 monitorUrlChange();
 addCtrlSSupport();
 fixTableOfContents();
+
+}
 
