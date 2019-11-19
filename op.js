@@ -51,10 +51,6 @@ if (document.URL.includes('openproject')) {
     }
 
 
-    const isOnWorkPackageView = function () {
-        return !!document.URL.match(/work_packages[/\\]\d+?/);
-    }
-
     const addDiffButtons = function () {
         // try to find expected diff view
         const diffView = document.querySelector('#content > .text-diff');
@@ -110,11 +106,7 @@ if (document.URL.includes('openproject')) {
         document.addEventListener("keydown", function(e) {
             // ctrl + s
           if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) && e.keyCode == 83) {
-            if (isOnWorkPackageView() === false) {
-                return;
-            }
-
-            const saveButton = document.querySelector('.inplace-edit--control--save a[href][title="Description: Save"]');
+            const saveButton = document.querySelector('.inplace-edit--control--save a[href][title$=": Save"]');
             if (!saveButton) {
                 return;
             }
@@ -124,7 +116,7 @@ if (document.URL.includes('openproject')) {
           }
 
           if (e.keyCode == 27) {
-            const cancelSaveButton = document.querySelector('.inplace-edit--control--cancel a[href][title="Description: Cancel"]');
+            const cancelSaveButton = document.querySelector('.inplace-edit--control--cancel a[href][title$=": Cancel"]');
             if (!cancelSaveButton) {
                 return;
             }
