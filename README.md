@@ -37,6 +37,8 @@ Api: `$HOME\Documents\WindowsPowerShell\Scripts\GetOpenProject-CloseStatusForWP.
   [ ] ograniczenie pobierania wp do wybranego okresu czasu (np ostatni tydzień/dwa)
   [ ] grupowanie pobranych wp na dni
   [ ] grupowanie pobranych wp na nowe/zaktualizowane/zamknięte/bugi
+  [ ] poprawienie wyglądu
+  [ ] wykres
 - spis treści cały czas widoczny i pokazujący gdzie się znajdujesz w dokumencie
 
 - automatyczne przypisywanie mnie do zadania przy tworzeniu nowych
