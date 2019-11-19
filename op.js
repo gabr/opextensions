@@ -169,6 +169,13 @@ if (document.URL.includes('openproject')) {
         prevUrl = document.URL;
 
         addDiffButtons();
+
+        // make so header link goes to the My page
+        var titleHeaderLink = document.querySelector('.home-link[href="https://10.0.0.101/openproject/"]')
+        if (titleHeaderLink) {
+            titleHeaderLink.setAttribute('href', 'https://10.0.0.101/openproject/my/page')
+        }
+
     }
 
     monitorUrlChange();
